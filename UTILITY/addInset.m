@@ -58,12 +58,57 @@ scale = metadata.scale;  % screen scale factor
 arg.ProjectionLineWidth = arg.ProjectionLineWidth*scale;
 arg.BoxLineWidth = arg.BoxLineWidth*scale;
 
+% Get axis limits 
+% Also deal with log-scale if nessesary (rescales limits and inset pos).
+if strcmpi(xscale(arg.Axes),'log')
+  % log10 scale
+  xlimits = log10(arg.Axes.XLim);
+  if isinf(xlimits(1))  % !! xmin=0
+    % Collect x data points.
+    lines = findall(arg.Axes,'Type','line');
+    xdata = [lines.XData];
+    % Remove nans!
+    xdata = xdata(~isnan(xdata));
+    % Remove Infs!
+    xdata = xdata(~isinf(xdata));
+    % Remove zeros!
+    xdata = xdata(xdata>=0);
+    % Replace limit!
+    xlimits(1) = log10(min(xdata));
+  end
+  arg.InsetPosition(1) = log10(arg.InsetPosition(1));
+else
+  % linear scale
+  xlimits = arg.Axes.XLim;
+end
+if strcmpi(yscale(arg.Axes),'log')
+  % log10 scale
+  ylimits = log10(arg.Axes.YLim);
+  if isinf(ylimits(1))  % !! ymin=0
+    % Collect y data points.
+    lines = findall(arg.Axes,'Type','line');
+    ydata = [lines.YData];
+    % Remove nans!
+    ydata = ydata(~isnan(ydata));
+    % Remove Infs!
+    ydata = ydata(~isinf(ydata));
+    % Remove zeros!
+    ydata = ydata(ydata>=0);
+    % Replace limit!
+    ylimits(1) = log10(min(ydata));
+  end
+  arg.InsetPosition(2) = log10(arg.InsetPosition(2));
+else
+  % linear scale
+  ylimits = arg.Axes.YLim;
+end
+
 % Determine inset position in relative figure units.
 % First, get position relative to axes.
-xl = arg.Axes.XLim(1);
-yl = arg.Axes.YLim(1);
-dx = diff(arg.Axes.XLim);
-dy = diff(arg.Axes.YLim);
+xl = xlimits(1);
+yl = ylimits(1);
+dx = diff(xlimits);
+dy = diff(ylimits);
 x0 = (arg.InsetPosition(1)-xl)/dx;
 y0 = (arg.InsetPosition(2)-yl)/dy;
 % Next, get position relative to figure window.
@@ -112,14 +157,22 @@ for line = findall(insetAx,'Type','line')'
 end
 
 % Calculate bounds of inset axes in data units.
-xl = arg.Axes.XLim;
-yl = arg.Axes.YLim;
+xl = xlimits;
+yl = ylimits;
 po = arg.Axes.Position;
 pi = insetAx.Position;
 x1 = (pi(1)-po(1))/po(3)*diff(xl)+xl(1);
 x2 = (pi(1)+pi(3)-po(1))/po(3)*diff(xl)+xl(1);
 y1 = (pi(2)-po(2))/po(4)*diff(yl)+yl(1);
 y2 = (pi(2)+pi(4)-po(2))/po(4)*diff(yl)+yl(1);
+if strcmpi(xscale(arg.Axes),'log')
+  x1 = 10^x1;
+  x2 = 10^x2;
+end
+if strcmpi(yscale(arg.Axes),'log')
+  y1 = 10^y1;
+  y2 = 10^y2;
+end
 
 % Determine start/end points for projection lines.
 pointsInset = [

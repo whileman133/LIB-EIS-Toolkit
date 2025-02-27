@@ -120,9 +120,7 @@ for k = length(simData.ss):-1:1
     legend('Location','best','Interpreter','latex');
     xlabel('Time, $t$ [s]','Interpreter','latex');
     ylabel('Applied Current or Cell Voltage');
-    title( ...
-      sprintf('Time-Domain Response: $f=%.0f\\,\\mathrm{mHz}$',f0*1000), ...
-      'Interpreter','latex');
+    title('')
     thesisFormat;
     figure;
     semilogx(tfFreq,20*log10(abs(Iapp)),'-o','DisplayName','$I_\mathrm{app}(f)$'); hold on;
