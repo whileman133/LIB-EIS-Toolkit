@@ -27,13 +27,13 @@ function simData = simTDZ(cellModel,freq,socPct,TdegC,varargin)
 %   as I [A]. Default I=C/10.
 %
 % data = SIMTDZ(...,'Ns',Ns) specifies the sampling rate as the number of 
-%   samples per period of the sinusoid [Sa/period]. Default Ns=40.
+%   samples per period of the sinusoid [Sa/period]. Default Ns=32.
 %
 % data = SIMTDZ(...,'Nt',Nt) specifies the length of the transient interval 
 %   in periods of the applied sinusoid [periods]. Default Nt=20.
 %
 % data = SIMTDZ(...,'Nss',Nss) specifies the length of the steady-state 
-%   interval in periods of the applied sinusoid [periods]. Default Nss=10.
+%   interval in periods of the applied sinusoid [periods]. Default Nss=8.
 %
 % data = SIMTDZ(...,'Verbose',true) outputs status messages to the command
 %   window.
@@ -66,9 +66,9 @@ parser.addRequired('socPct',@(x)isscalar(x)&&0<=x&&x<=100);
 parser.addOptional('TdegC',25,@(x)isscalar(x));
 parser.addParameter('Vars',struct('Phise',[0 3],'Phie',3),@(x)isstruct(x));
 parser.addParameter('I',[],@(x)isscalar(x)&&x>0);
-parser.addParameter('Ns',40,@(x)isscalar(x)&&isinteger(x)&&x>0);
+parser.addParameter('Ns',32,@(x)isscalar(x)&&isinteger(x)&&x>0);
 parser.addParameter('Nt',20,@(x)isscalar(x)&&isinteger(x)&&x>0);
-parser.addParameter('Nss',10,@(x)isscalar(x)&&isinteger(x)&&x>0);
+parser.addParameter('Nss',8,@(x)isscalar(x)&&isinteger(x)&&x>0);
 parser.addParameter('Verbose',false,@(x)isscalar(x)&&islogical(x));
 parser.addParameter('OptSimFOM',struct,@isstruct);
 parser.parse(cellModel,freq,socPct,TdegC,varargin{:});
