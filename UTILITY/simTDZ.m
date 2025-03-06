@@ -82,7 +82,7 @@ end
 if p.Verbose
     fprintf('Starting time-domain EIS simulation\n');
 end
-FOM = genFOM(cellData);
+FOM = genFOM(cellModel);
 
 % Run simulation at each frequency (backwards to avoid need to pre-allocate
 % structure arrays).

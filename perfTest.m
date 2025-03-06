@@ -17,7 +17,7 @@ freq = logspace(-3,4,10);   % Frequency points to evalulate in the spectrum [Hz]
 socPct = 50;                % Cell SOC setpoint [%].
 TdegC = 25;                 % Cell temperature [degC].
 I = cellParams.function.const.Q()/10; % Amplitude of Iapp sinusoids [A].
-numTrials = 100;
+numTrials = 10;
 
 % Time domain simulation.
 wctTDZ = zeros(1,numTrials);
