@@ -52,7 +52,7 @@ function spectra = processTDZ(simData,varargin)
 
 isinteger = @(x)floor(x)==x;
 parser = inputParser;
-parser.addRequired('simData',@(x)isstruct(x)&&strcmp(x.origin__,'simEIS'));
+parser.addRequired('simData',@(x)isstruct(x)&&strcmp(x.origin__,'simTDZ'));
 parser.addParameter('NumHarmonics',2,@(x)isscalar(x)&&isinteger(x)&&x>=1);
 parser.addParameter('EvalLinTF',false,@(x)isscalar(x)&&islogical(x));
 parser.addParameter('NumTFFreqPoints',1000,@(x)isscalar(x)&&isinteger(x));
