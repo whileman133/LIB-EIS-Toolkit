@@ -2,3 +2,5 @@ venv/
 .idea/
 __pycache__/
 plots/
+runCC.py
+compareCOMSOL.py
