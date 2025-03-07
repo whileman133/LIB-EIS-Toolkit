@@ -36,11 +36,11 @@ end
 
 % Perturbation.
 wctPert = zeros(1,numTrials);
+model = genFOM(cellParams);
+model = addEIS(model);
 for t = 1:numTrials
   tic;
-  model = genFOM(cellParams);
-  model = addEIS(model);
-  [FOMout,model] = simEIS(model,SOCs,freqs);
+  [FOMout,model] = simEIS(model,socPct/50,freq);
   wctPert(t) = toc;
 end
 
