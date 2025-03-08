@@ -35,4 +35,4 @@ simData = simTDZ(cellModel,freq,socPct,TdegC, ...
     'Vars',Vars,'I',I,'Verbose',true);
 
 % Save results to disk.
-save("demoEIS.mat","simData");
+save("demoTDZ.mat","simData");
