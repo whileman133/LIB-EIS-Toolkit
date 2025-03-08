@@ -40,7 +40,7 @@ model = genFOM(cellParams);
 model = addEIS(model);
 for t = 1:numTrials
   tic;
-  [FOMout,model] = simEIS(model,socPct/50,freq);
+  [FOMout,model] = simEIS(model,socPct/100,freq);
   wctPert(t) = toc;
 end
 
