@@ -12,7 +12,7 @@ MATLAB code is provided for calculating battery impedance from COMSOL models usi
 
 ## Python Resources
 
-Python code is provided for calculating battery impedance from PyBaMM models using frequency-domain linear perturbation (LP). We provide two lumped-parameter PyBaMM models: one implementing the Plett and Trimboli LIB model (see tge `lumped.libcell` module) and another implementing the lithium-metal battery (LMB) model specified by Hileman et al.[^2] (see the `lumped.lmbcell` package). Utility functions for working with the LIB cell model are provided within the `util` module. The code has been tested with Python version 3.12.7 and the requirements specified in `requirements.txt`.
+Python code is provided for calculating battery impedance from PyBaMM models using frequency-domain linear perturbation (LP). We provide two lumped-parameter PyBaMM models: one implementing the Plett and Trimboli LIB model (see the `lumped.libcell` module) and another implementing the lithium-metal battery (LMB) model specified by Hileman et al.[^2] (see the `lumped.lmbcell` package). Utility functions for working with the LIB cell model are provided within the `util` module. The code has been tested with Python version 3.12.7 and the requirements specified in `requirements.txt`.
 
 - The `demoPerturbation.py` script shows how to perform LP on a `lumped.libcell` PyBaMM model.
 
